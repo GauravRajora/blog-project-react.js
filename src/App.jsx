@@ -5,7 +5,7 @@ import Dashboard from './pages/admin/Dashboard';
 import Users from './pages/admin/Users';
 import Blog from './pages/admin/Blog';
 import Login from './pages/admin/Login';
-import Homepage from './pages/user/homepage';
+import Homepage from './pages/user/Homepage';
 
 function App() {
   return (
