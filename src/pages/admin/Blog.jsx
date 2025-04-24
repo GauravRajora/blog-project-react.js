@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import BlogFormModal from '../../components/admin/BlogFormModal';
-import BlogList from './BlogList';
+import BlogFormModal from '../../components/admin/BlogFormModal.jsx';
+import BlogList from './BlogList.jsx';
 
 const Blog = () => {
     const [loading, setLoading] = useState(true);

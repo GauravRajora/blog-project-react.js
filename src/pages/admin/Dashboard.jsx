@@ -4,25 +4,12 @@ import {
   } from 'recharts';
   
   function Dashboard() {
-    const userGrowthData = [
-      { month: 'Jan', users: 30 },
-      { month: 'Feb', users: 45 },
-      { month: 'Mar', users: 60 },
-      { month: 'Apr', users: 80 },
-      { month: 'May', users: 100 },
-    ];
   
     const blogCategoryData = [
       { name: 'Tech', value: 10 },
       { name: 'Lifestyle', value: 5 },
       { name: 'Travel', value: 3 },
       { name: 'Education', value: 7 },
-    ];
-  
-    const userRolesData = [
-      { role: 'Admin', count: 2 },
-      { role: 'Editor', count: 5 },
-      { role: 'User', count: 20 },
     ];
   
     const blogWeeklyData = [

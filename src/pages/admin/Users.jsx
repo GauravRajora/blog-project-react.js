@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import Pagination from '../../components/admin/pagination';
+import Pagination from '../../components/admin/pagination.jsx';
 
 const Users = () => {
   const [users, setUsers] = useState([]);

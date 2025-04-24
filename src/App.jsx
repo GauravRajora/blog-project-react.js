@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from './components/admin/Layout';
-import ProtectedRoute from './components/admin/ProtectedRoute';
-import Dashboard from './pages/admin/Dashboard';
-import Users from './pages/admin/Users';
-import Blog from './pages/admin/Blog';
-import Login from './pages/admin/Login';
-import Homepage from './pages/user/Homepage';
+import Layout from './components/admin/Layout.jsx';
+import ProtectedRoute from './components/admin/ProtectedRoute.jsx';
+import Dashboard from './pages/admin/Dashboard.jsx';
+import Users from './pages/admin/Users.jsx';
+import Blog from './pages/admin/Blog.jsx';
+import Login from './pages/admin/Login.jsx';
+import Homepage from './pages/user/Homepage.jsx';
 
 function App() {
   return (

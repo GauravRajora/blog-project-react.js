@@ -15,7 +15,7 @@ const ProtectedRoute = ({ children }) => {
       localStorage.removeItem('token');
       return <Navigate to="/login" replace />;
     }
-  } catch (e) {
+  } catch {
     return <Navigate to="/login" replace />;
   }
 

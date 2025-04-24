@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     setError('');
     try {
-        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -32,7 +32,7 @@ const Login = () => {
 
       navigate('/');
     } catch (err) {
-      setError('Something went wrong.');
+      setError('Something went wrong.', err);
     }
   };
 

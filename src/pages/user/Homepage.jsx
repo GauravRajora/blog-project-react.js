@@ -1,15 +1,15 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Header from './Header';
-import Footer from './Footer';
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
 
 // Lazy loaded components
-const BlogCarousel = lazy(() => import('../../components/user/BlogCarousel'));
-const FeaturedBlog = lazy(() => import('../../components/user/FeaturedBlog'));
-const BlogByCategory = lazy(() => import('../../components/user/BlogByCategory'));
-const LatestBlog = lazy(() => import('../../components/user/LatestBLog'));
-const LatestBlogComments = lazy(() => import('../../components/user/LatestBlogComments'));
+const BlogCarousel = lazy(() => import('../../components/user/BlogCarousel.jsx'));
+const FeaturedBlog = lazy(() => import('../../components/user/FeaturedBlog.jsx'));
+const BlogByCategory = lazy(() => import('../../components/user/BlogByCategory.jsx'));
+const LatestBlog = lazy(() => import('../../components/user/LatestBlogs.jsx'));
+const LatestBlogComments = lazy(() => import('../../components/user/LatestBlogComments.jsx'));
 
 const comments = [
   {

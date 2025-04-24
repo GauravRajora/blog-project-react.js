@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import Pagination from '../../components/admin/pagination';
+import Pagination from '../../components/admin/pagination.jsx';
 
 const BlogList = ({ blogs, currentPage, totalPages, setCurrentPage }) => {
   const [searchQuery, setSearchQuery] = useState('');
