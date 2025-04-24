@@ -3,5 +3,9 @@
 @import "slick-carousel/slick/slick-theme.css";
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.custom-shadow {
+    box-shadow: 0 10px 10px rgba(0, 0, 0, .08);
 }

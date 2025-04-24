@@ -1,58 +1,96 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Header from './Header';
 import Footer from './Footer';
-import CommentSection from './CommentSection';
-import BlogCarousel from '../../components/user/BlogCarousel';
+
+// Lazy loaded components
+const BlogCarousel = lazy(() => import('../../components/user/BlogCarousel'));
+const FeaturedBlog = lazy(() => import('../../components/user/FeaturedBlog'));
+const BlogByCategory = lazy(() => import('../../components/user/BlogByCategory'));
+const LatestBlog = lazy(() => import('../../components/user/LatestBLog'));
+const LatestBlogComments = lazy(() => import('../../components/user/LatestBlogComments'));
+
+const comments = [
+  {
+    name: 'David',
+    date: '16 Jan 2020',
+    comment: 'A writer is someone for whom writing is more difficult than...',
+    avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+  },
+  {
+    name: 'Kokawa',
+    date: '12 Feb 2020',
+    comment: 'Striking pewter studded epaulettes silver zips',
+    avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+  },
+  {
+    name: 'Tsukasi',
+    date: '18 May 2020',
+    comment: 'Workwear bow detailing a slingback buckle strap',
+    avatar: 'https://randomuser.me/api/portraits/men/65.jpg',
+  },
+];
 
 const Homepage = () => {
-    const [blogs] = useState([
-        {
-            id: 1,
-            title: 'How to Build a React App',
-            content: 'In this article, we will go through the steps of building a simple React app...',
-            author: 'Jane Doe',
-            comments: [
-                { id: 1, text: 'Great article! Very helpful, thank you.', date: '2025-04-01 12:30' },
-            ],
-        },
-        {
-            id: 2,
-            title: 'Understanding JavaScript Closures',
-            content: 'JavaScript closures are a powerful concept that every developer should understand...',
-            author: 'John Smith',
-            comments: [
-                { id: 1, text: 'Very insightful. Learned a lot about closures.', date: '2025-04-02 14:15' },
-            ],
-        },
-    ]);
+  const [blogs, setBlogs] = useState([]);
+  const [featuredBlogs, setFeaturedBlogs] = useState([]);
 
-    return (
-        <div className="bg-gray-50">
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
 
-            <Header />
+    const fetchBlogs = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/blogs?page=1&limit=20`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await res.json();
+        setBlogs(data.blogs?.filter(blog => blog.isPublished) || []);
+      } catch (err) {
+        console.error('Error fetching blogs:', err);
+      }
+    };
 
-            <BlogCarousel />
+    fetchBlogs();
+  }, []);
 
-            <main className="max-w-7xl mx-auto px-6 py-8">
-                <h2 className="text-3xl font-bold text-center mb-8">Our Blog</h2>
+  useEffect(() => {
+    if (!blogs.length) return;
+    setFeaturedBlogs(blogs.filter(blog => blog.isFeatured).slice(0, 4));
+  }, [blogs]);
 
-                <div className="space-y-8">
-                    {blogs.map((blog) => (
-                        <div key={blog.id} className="bg-white p-6 rounded-xl shadow-md">
-                            <h3 className="text-2xl font-semibold text-teal-600">{blog.title}</h3>
-                            <p className="text-gray-600 mt-2">By {blog.author}</p>
-                            <p className="mt-4 text-gray-800">{blog.content}</p>
+  const latestBlogs = [...blogs]
+    .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
+    .slice(0, 2);
 
-                            {/* Comment Section */}
-                            <CommentSection blogId={blog.id} comments={blog.comments} />
-                        </div>
-                    ))}
-                </div>
-            </main>
+  const mostPopular = [...blogs]
+    .sort((a, b) => b.views - a.views)
+    .slice(0, 2);
 
-            <Footer />
-        </div>
-    );
+  const categories = [...new Set(blogs.flatMap(blog => blog.tags).slice(0, 3))];
+
+  return (
+    <div className="bg-gray-100">
+      <Header />
+
+      <Suspense fallback={<div className="text-center py-10">Loading components...</div>}>
+        <BlogCarousel blogs={blogs.slice(0, 5)} />
+
+        <main className="max-w-7xl mx-auto px-6 py-8">
+          <LatestBlog latestBlogs={latestBlogs} mostPopular={mostPopular} />
+          <FeaturedBlog data={featuredBlogs} />
+          <BlogByCategory categories={categories} blogs={blogs.slice(0, 4)} />
+          <LatestBlogComments latestPosts={latestBlogs} comments={comments} />
+        </main>
+      </Suspense>
+
+      <Footer />
+    </div>
+  );
 };
 
 export default Homepage;

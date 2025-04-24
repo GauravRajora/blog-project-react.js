@@ -2,19 +2,19 @@ import React from 'react';
 
 const Header = () => {
   return (
-    <header className="bg-teal-500 text-white py-4 sticky top-0 z-50 shadow-md">
+    <header className="bg-white text-gray-800 py-4 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <h1 className="text-3xl font-bold">My Blog</h1>
+        <h1 className="font-bold">My Blog</h1>
         <nav>
-          <ul className="flex space-x-6">
+          <ul className="flex space-x-6 text-sm font-medium">
             <li>
-              <a href="/" className="hover:text-teal-300">Home</a>
+              <a href="/" className="hover:text-blue-600 transition-colors duration-200">Home</a>
             </li>
             <li>
-              <a href="/about" className="hover:text-teal-300">About</a>
+              <a href="/about" className="hover:text-blue-600 transition-colors duration-200">About</a>
             </li>
             <li>
-              <a href="/contact" className="hover:text-teal-300">Contact</a>
+              <a href="/contact" className="hover:text-blue-600 transition-colors duration-200">Contact</a>
             </li>
           </ul>
         </nav>

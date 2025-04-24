@@ -1,42 +1,45 @@
 import React, { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
 import "./SliderGallery.css"; // your custom CSS
-
-const slides = [
-    {
-        id: 1,
-        title: "Dummy Slide 1",
-        image: "https://dummyimage.com/1600x600/000/fff.jpg&text=Slide+1",
-        thumb: "https://dummyimage.com/96x96/fff.jpg&text=1",
-    },
-    {
-        id: 2,
-        title: "Dummy Slide 2",
-        image: "https://dummyimage.com/1600x600/000/fff.jpg&text=Slide+2",
-        thumb: "https://dummyimage.com/96x96/fff.jpg&text=2",
-    },
-    {
-        id: 3,
-        title: "Dummy Slide 3",
-        image: "https://dummyimage.com/1600x600/000/fff.jpg&text=Slide+3",
-        thumb: "https://dummyimage.com/96x96/fff.jpg&text=3",
-    },
-    {
-        id: 4,
-        title: "Dummy Slide 4",
-        image: "https://dummyimage.com/1600x600/000/fff.jpg&text=Slide+4",
-        thumb: "https://dummyimage.com/96x96/fff.jpg&text=4",
-    },
-    {
-        id: 5,
-        title: "Dummy Slide 5",
-        image: "https://dummyimage.com/1600x600/000/fff.jpg&text=Slide+5",
-        thumb: "https://dummyimage.com/96x96/fff.jpg&text=5",
-    },
-];
-
-
 const BlogCarousel = () => {
+    const slides = [
+        {
+            id: 1,
+            title: "Majestic Mountains",
+            image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80",
+            thumb: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=96&q=80",
+            description: "A beautiful view of majestic mountains under the golden light of sunset.",
+        },
+        {
+            id: 2,
+            title: "Ocean Vibes",
+            image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80",
+            thumb: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=96&q=80",
+            description: "Feel the calm waves and ocean breeze on a quiet beach.",
+        },
+        {
+            id: 3,
+            title: "City Lights",
+            image: "https://images.unsplash.com/photo-1499346030926-9a72daac6c63?auto=format&fit=crop&w=1600&q=80",
+            thumb: "https://images.unsplash.com/photo-1499346030926-9a72daac6c63?auto=format&fit=crop&w=96&q=80",
+            description: "The city comes alive with vibrant lights and energy at night.",
+        },
+        {
+            id: 4,
+            title: "Serene Forest",
+            image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80",
+            thumb: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=96&q=80",
+            description: "A peaceful walk through the lush green forest surrounded by nature.",
+        },
+        {
+            id: 5,
+            title: "City Lights",
+            image: "https://images.unsplash.com/photo-1499346030926-9a72daac6c63?auto=format&fit=crop&w=1600&q=80",
+            thumb: "https://images.unsplash.com/photo-1499346030926-9a72daac6c63?auto=format&fit=crop&w=96&q=80",
+            description: "The dazzling skyline with sparkling lights illuminating the streets.",
+        },
+    ];
+
     const mainSliderRef = useRef(null);
     const thumbSliderRef = useRef(null);
 
@@ -54,7 +57,7 @@ const BlogCarousel = () => {
                 <Slider
                     asNavFor={nav2}
                     ref={mainSliderRef}
-                    arrows={false}
+                    arrows={true}
                     fade={true}
                     slidesToShow={1}
                     slidesToScroll={1}
@@ -70,9 +73,14 @@ const BlogCarousel = () => {
                                 className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                <h2 className="text-white text-3xl md:text-5xl font-bold px-6 text-center drop-shadow-lg">
-                                    {slide.title}
-                                </h2>
+                                <div className="text-center px-6">
+                                    <h2 className="text-white text-3xl md:text-5xl font-bold drop-shadow-lg">
+                                        {slide.title}
+                                    </h2>
+                                    <p className="text-white mt-2 text-sm md:text-lg drop-shadow-lg">
+                                        {slide.description}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -87,7 +95,7 @@ const BlogCarousel = () => {
                     swipeToSlide={true}
                     focusOnSelect={true}
                     vertical={true}
-                    arrows={true}
+                    arrows={false}
                 >
                     {slides.map((slide) => (
                         <div key={slide.id}>
